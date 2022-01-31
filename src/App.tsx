@@ -1,6 +1,4 @@
 import { Game } from "./game";
-import { GameBoard } from "./gameBoard";
-import { Keyboard } from "./keyboard";
 import { WordProvider } from "./util/contexts/WordContext";
 
 const App: React.FC = () => {

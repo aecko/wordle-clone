@@ -6,7 +6,7 @@ export const WordContext = createContext({
   yellowLetters: [] as string[],
   greenLetters: [] as string[],
   greyLetters: [] as string[],
-  guessWord: (guessedWord: string) => {},
+  guessWord: () => {},
   guesses: [] as string[],
   changeGuess: (letter: string) => {},
 });
@@ -40,8 +40,10 @@ export const WordProvider: React.FC = ({ children }) => {
     setWord(newWord);
   };
 
-  const guessWord = (guessedWord: string) => {
-    setCurrentGuessIndex(currentGuessIndex + 1);
+  const guessWord = () => {
+    console.log("SUBMITTED");
+    const guessedWord: string = guesses[currentGuessIndex];
+    if (guessedWord.length !== 5) return null;
 
     if (guessedWord === word) {
       setGreenLetters(word.split(""));
@@ -59,6 +61,7 @@ export const WordProvider: React.FC = ({ children }) => {
         setYellowLetters(yellowLetters.concat(letter));
       });
     }
+    setCurrentGuessIndex(currentGuessIndex + 1);
   };
 
   return (
