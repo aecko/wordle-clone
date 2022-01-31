@@ -1,25 +1,24 @@
-import { useContext } from "react";
-import { WordContext } from "../util/contexts/WordContext";
 import { GameBoardContainer, GameBoardRow } from "./style";
 import { Tile } from "./tile";
 
-export const GameBoard: React.FC = () => {
-  const { word, guessWord, guesses } = useContext(WordContext);
-  const guessesAllowed = 5;
-  const wordLength = 5;
+interface IGameBoardProps {
+  guesses: string[];
+}
+
+export const GameBoard: React.FC<IGameBoardProps> = ({ guesses }) => {
   return (
     <GameBoardContainer>
-      {Array(guessesAllowed)
-        .fill(0)
-        .map((_, index) => (
+      {guesses.map((_, index) => {
+        return (
           <GameBoardRow key={index}>
-            {Array(wordLength)
+            {Array(5)
               .fill(0)
-              .map((_, index) => (
-                <Tile />
+              .map((_, letterIndex) => (
+                <Tile key={index} letter={guesses[index].charAt(letterIndex)} />
               ))}
           </GameBoardRow>
-        ))}
+        );
+      })}
     </GameBoardContainer>
   );
 };

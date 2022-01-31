@@ -4,14 +4,14 @@ import { KeyboardContainer, KeyboardRow } from "./style";
 let qwertyKeyboardLetters = [
   ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
   ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
-  ["z", "x", "c", "v", "b", "n", "m"],
+  ["z", "x", "c", "v", "b", "n", "m", "del"],
 ];
 
-const handleLetterSelect = (letter: string) => {
-  console.log(letter);
-};
+interface IKeyboardProps {
+  handleKeyPress: (letter: string) => void;
+}
 
-export const Keyboard: React.FC = () => {
+export const Keyboard: React.FC<IKeyboardProps> = ({ handleKeyPress }) => {
   return (
     <KeyboardContainer>
       {qwertyKeyboardLetters.map((row) => (
@@ -20,7 +20,7 @@ export const Keyboard: React.FC = () => {
             <LetterTile
               key={letter}
               letter={letter.toUpperCase()}
-              onClick={handleLetterSelect}
+              onClick={handleKeyPress}
             />
           ))}
         </KeyboardRow>

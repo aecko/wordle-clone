@@ -26,8 +26,8 @@ export const TileContainer = styled.div<ITileContainerProps>`
     }
   }};
   border: 1px solid #fff;
-  color: #fff;
-  font-size: 1.5rem;
+  color: #000;
+  font-size: 4rem;
   display: flex;
   justify-content: center;
   align-items: center;

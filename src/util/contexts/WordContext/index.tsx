@@ -8,14 +8,32 @@ export const WordContext = createContext({
   greyLetters: [] as string[],
   guessWord: (guessedWord: string) => {},
   guesses: [] as string[],
+  changeGuess: (letter: string) => {},
 });
 
 export const WordProvider: React.FC = ({ children }) => {
-  const [word, setWord] = useState("");
+  const [word, setWord] = useState("WORDS");
   const [yellowLetters, setYellowLetters] = useState([] as string[]);
   const [greenLetters, setGreenLetters] = useState([] as string[]);
   const [greyLetters, setGreyLetters] = useState([] as string[]);
-  const [guesses, setGuesses] = useState([] as string[]);
+  const [guesses, setGuesses] = useState(Array(5).fill(""));
+  const [currentGuessIndex, setCurrentGuessIndex] = useState(0);
+
+  const changeGuess = (letter: string) => {
+    var tempGuesses: string[] = [...guesses];
+    var currentGuess = tempGuesses[currentGuessIndex];
+
+    if (currentGuess.length > 0 && letter === "DEL") {
+      currentGuess = currentGuess.slice(0, -1);
+    } else if (letter !== "DEL") {
+      currentGuess += letter;
+    }
+
+    console.log("currentGuess", currentGuess);
+    console.log("letter", letter);
+    tempGuesses[currentGuessIndex] = currentGuess;
+    setGuesses(tempGuesses);
+  };
 
   const generateNewWord = () => {
     const newWord = "";
@@ -23,7 +41,7 @@ export const WordProvider: React.FC = ({ children }) => {
   };
 
   const guessWord = (guessedWord: string) => {
-    setGuesses([...guesses, guessedWord]);
+    setCurrentGuessIndex(currentGuessIndex + 1);
 
     if (guessedWord === word) {
       setGreenLetters(word.split(""));
@@ -53,6 +71,7 @@ export const WordProvider: React.FC = ({ children }) => {
         greyLetters,
         guessWord,
         guesses,
+        changeGuess,
       }}
     >
       {children}
