@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { UIContext } from "../../contexts/UIContext";
+import { UIContext } from "../../util/contexts/UIContext";
 import { TileStates } from "../../util/consts/TileStates";
 import { WordContext } from "../../util/contexts/WordContext";
 import { LetterTileContainer } from "./style";

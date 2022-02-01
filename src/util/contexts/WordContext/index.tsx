@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { GameStates, IGameStates, TileStates } from "../../consts/TileStates";
+import { GameStates, TileStates } from "../../consts/TileStates";
 import { WORDS } from "../../consts/words";
 
 type LetterTile = {

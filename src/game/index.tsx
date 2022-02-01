@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { UIContext } from "../contexts/UIContext";
+import { UIContext } from "../util/contexts/UIContext";
 import { GameBoard } from "../gameBoard";
 import { Keyboard } from "../keyboard";
 import { GameStates } from "../util/consts/TileStates";

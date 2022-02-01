@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { UIContext } from "../contexts/UIContext";
+import { UIContext } from "../util/contexts/UIContext";
 import { LetterTile } from "./letterTile";
 import { KeyboardContainer, KeyboardRow } from "./style";
 
