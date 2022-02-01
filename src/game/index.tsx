@@ -11,6 +11,7 @@ export const Game: React.FC = () => {
     useContext(WordContext);
   return (
     <GameContainer>
+      <p style={{ color: "white" }}>{word}</p>
       {gameState !== GameStates.PLAYING && (
         <GameInfo gameState={gameState} onReset={resetGame} gameWord={word} />
       )}

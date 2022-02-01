@@ -1,5 +1,6 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { GameStates, IGameStates, TileStates } from "../../consts/TileStates";
+import { WORDS } from "../../consts/words";
 
 type LetterTile = {
   letter: string;
@@ -12,7 +13,6 @@ export type Guesses = Guess[];
 
 export const WordContext = createContext({
   word: "",
-  generateNewWord: () => {},
   yellowLetters: "",
   greenLetters: "",
   greyLetters: "",
@@ -24,7 +24,7 @@ export const WordContext = createContext({
 });
 
 export const WordProvider: React.FC = ({ children }) => {
-  const [word, setWord] = useState("WORDS");
+  const [word, setWord] = useState("");
   const [yellowLetters, setYellowLetters] = useState("");
   const [greenLetters, setGreenLetters] = useState("");
   const [greyLetters, setGreyLetters] = useState("");
@@ -32,6 +32,10 @@ export const WordProvider: React.FC = ({ children }) => {
   const [currentGuessIndex, setCurrentGuessIndex] = useState(0);
   const [gameState, setGameState] = useState(0);
   console.log(guesses);
+
+  useEffect(() => {
+    generateNewWord();
+  }, []);
 
   const changeGuess = (letter: string) => {
     var tempGuesses = [...guesses];
@@ -48,8 +52,8 @@ export const WordProvider: React.FC = ({ children }) => {
   };
 
   const generateNewWord = () => {
-    const newWord = "";
-    setWord(newWord);
+    const randomWord = WORDS[Math.floor(Math.random() * WORDS.length)];
+    setWord(randomWord.toUpperCase());
   };
 
   const guessWord = () => {
@@ -96,13 +100,13 @@ export const WordProvider: React.FC = ({ children }) => {
     setGreenLetters("");
     setGreyLetters("");
     setGameState(GameStates.PLAYING);
+    generateNewWord();
   };
 
   return (
     <WordContext.Provider
       value={{
         word,
-        generateNewWord,
         yellowLetters,
         greenLetters,
         greyLetters,
