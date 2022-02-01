@@ -1,4 +1,4 @@
-import UIProvider from "./contexts/UIContext";
+import UIProvider from "./util/contexts/UIContext";
 import { Game } from "./game";
 import { WordProvider } from "./util/contexts/WordContext";
 import { colours } from "./util/theme/colors";
