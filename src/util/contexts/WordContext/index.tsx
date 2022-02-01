@@ -21,6 +21,7 @@ export const WordContext = createContext({
   changeGuess: (letter: string) => {},
   gameState: GameStates.PLAYING,
   resetGame: () => {},
+  currentGuessIndex: 0,
 });
 
 export const WordProvider: React.FC = ({ children }) => {
@@ -115,6 +116,7 @@ export const WordProvider: React.FC = ({ children }) => {
         changeGuess,
         gameState,
         resetGame,
+        currentGuessIndex,
       }}
     >
       {children}

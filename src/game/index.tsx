@@ -8,12 +8,24 @@ import { GameInfo } from "./gameInfo";
 import { GameContainer, GuessTheWordText } from "./style";
 
 export const Game: React.FC = () => {
-  const { guesses, changeGuess, guessWord, gameState, resetGame, word } =
-    useContext(WordContext);
+  const {
+    guesses,
+    changeGuess,
+    guessWord,
+    gameState,
+    resetGame,
+    word,
+    currentGuessIndex,
+  } = useContext(WordContext);
   return (
     <GameContainer>
       {gameState !== GameStates.PLAYING && (
-        <GameInfo gameState={gameState} onReset={resetGame} gameWord={word} />
+        <GameInfo
+          gameState={gameState}
+          onReset={resetGame}
+          gameWord={word}
+          guessCount={currentGuessIndex}
+        />
       )}
       <GameBoard guesses={guesses} />
       <Keyboard handleKeyPress={changeGuess} handleSubmit={() => guessWord()} />

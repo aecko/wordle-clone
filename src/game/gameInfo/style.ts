@@ -22,7 +22,7 @@ export const GameInfoContainer = styled.div`
   border-radius: 1rem;
   background-color: #000;
   color: #fff;
-  padding: 1rem;
+  padding: 1rem 1rem;
 `;
 
 export const RetryButton = styled.button`

@@ -31,4 +31,5 @@ export const TileContainer = styled.div<ITileContainerProps>`
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all 1s ease-in-out;
 `;
