@@ -40,7 +40,7 @@ export const WordProvider: React.FC = ({ children }) => {
 
     if (currentGuess.length > 0 && letter === "DEL") {
       currentGuess = currentGuess.slice(0, -1);
-    } else if (letter !== "DEL") {
+    } else if (letter !== "DEL" && currentGuess.length < 5) {
       currentGuess.push({ letter, state: TileStates.UNSELECTED });
     }
     tempGuesses[currentGuessIndex] = currentGuess;
