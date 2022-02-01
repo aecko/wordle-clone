@@ -25,7 +25,12 @@ export const LetterTile: React.FC<ILetterTileProps> = ({ letter, onClick }) => {
   }, [greenLetters, yellowLetters, greyLetters, letter]);
 
   return (
-    <LetterTileContainer onClick={() => onClick(letter)} state={colorState}>
+    <LetterTileContainer
+      onClick={
+        colorState === TileStates.INCORRECT ? () => {} : () => onClick(letter)
+      }
+      state={colorState}
+    >
       {letter}
     </LetterTileContainer>
   );

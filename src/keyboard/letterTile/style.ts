@@ -34,6 +34,7 @@ export const LetterTileContainer = styled.button<ILetterTileContainerProps>`
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   &:hover {
-    background-color: #2874a6;
+    ${({ state }) =>
+      state === TileStates.INCORRECT ? `` : `background-color: #2874a6;`}
   }
 `;
