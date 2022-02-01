@@ -5,7 +5,7 @@ import { Keyboard } from "../keyboard";
 import { GameStates } from "../util/consts/TileStates";
 import { WordContext } from "../util/contexts/WordContext";
 import { GameInfo } from "./gameInfo";
-import { GameContainer } from "./style";
+import { GameContainer, HintButton } from "./style";
 
 export const Game: React.FC = () => {
   const {
@@ -16,6 +16,7 @@ export const Game: React.FC = () => {
     resetGame,
     word,
     currentGuessIndex,
+    getHint,
   } = useContext(WordContext);
   const { isMobile } = useContext(UIContext);
   return (
@@ -29,6 +30,7 @@ export const Game: React.FC = () => {
         />
       )}
       <GameBoard guesses={guesses} />
+      <HintButton onClick={getHint}>Hint</HintButton>
       <Keyboard handleKeyPress={changeGuess} handleSubmit={() => guessWord()} />
     </GameContainer>
   );

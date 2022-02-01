@@ -22,6 +22,7 @@ export const WordContext = createContext({
   gameState: GameStates.PLAYING,
   resetGame: () => {},
   currentGuessIndex: 0,
+  getHint: () => {},
 });
 
 export const WordProvider: React.FC = ({ children }) => {
@@ -32,6 +33,8 @@ export const WordProvider: React.FC = ({ children }) => {
   const [guesses, setGuesses] = useState<Guesses>(Array(5).fill([] as Guess));
   const [currentGuessIndex, setCurrentGuessIndex] = useState(0);
   const [gameState, setGameState] = useState(0);
+  const [hintIndex, setHintIndex] = useState(0);
+
   console.log(guesses);
 
   useEffect(() => {
@@ -91,6 +94,7 @@ export const WordProvider: React.FC = ({ children }) => {
       setGreenLetters(greenLetters + green);
       setYellowLetters(yellowLetters + yellow);
     }
+    setHintIndex(0);
     setCurrentGuessIndex(currentGuessIndex + 1);
   };
 
@@ -102,6 +106,19 @@ export const WordProvider: React.FC = ({ children }) => {
     setGreyLetters("");
     setGameState(GameStates.PLAYING);
     generateNewWord();
+  };
+
+  const getHint = () => {
+    const tempGuesses = [...guesses];
+    const currentGuess = tempGuesses[currentGuessIndex].slice();
+    currentGuess[hintIndex] = {
+      letter: word[hintIndex],
+      state: TileStates.CORRECT,
+    };
+    tempGuesses[currentGuessIndex] = currentGuess;
+    setHintIndex(hintIndex + 1);
+    setGreenLetters(greenLetters + word[hintIndex]);
+    setGuesses(tempGuesses);
   };
 
   return (
@@ -117,6 +134,7 @@ export const WordProvider: React.FC = ({ children }) => {
         gameState,
         resetGame,
         currentGuessIndex,
+        getHint,
       }}
     >
       {children}
