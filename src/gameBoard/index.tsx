@@ -1,8 +1,9 @@
+import { Guesses } from "../util/contexts/WordContext";
 import { GameBoardContainer, GameBoardRow } from "./style";
 import { Tile } from "./tile";
 
 interface IGameBoardProps {
-  guesses: string[];
+  guesses: Guesses;
 }
 
 export const GameBoard: React.FC<IGameBoardProps> = ({ guesses }) => {
@@ -14,7 +15,11 @@ export const GameBoard: React.FC<IGameBoardProps> = ({ guesses }) => {
             {Array(5)
               .fill(0)
               .map((_, letterIndex) => (
-                <Tile key={index} letter={guesses[index].charAt(letterIndex)} />
+                <Tile
+                  key={index}
+                  letter={guesses[index][letterIndex]?.letter}
+                  state={guesses[index][letterIndex]?.state}
+                />
               ))}
           </GameBoardRow>
         );

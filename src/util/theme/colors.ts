@@ -5,4 +5,5 @@ export const colours = {
   red: " #e74c3c",
   yellow: "#f4d03f",
   green: "#58d68d",
+  transparent: "transparent",
 };
