@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import { UIContext } from "../../contexts/UIContext";
 import { TileStates } from "../../util/consts/TileStates";
 import { WordContext } from "../../util/contexts/WordContext";
 import { LetterTileContainer } from "./style";
@@ -10,6 +11,7 @@ interface ILetterTileProps {
 
 export const LetterTile: React.FC<ILetterTileProps> = ({ letter, onClick }) => {
   const { greenLetters, yellowLetters, greyLetters } = useContext(WordContext);
+  const { isMobile } = useContext(UIContext);
   const [colorState, setColorState] = useState(TileStates.UNSELECTED);
 
   useEffect(() => {
@@ -30,6 +32,7 @@ export const LetterTile: React.FC<ILetterTileProps> = ({ letter, onClick }) => {
         colorState === TileStates.INCORRECT ? () => {} : () => onClick(letter)
       }
       state={colorState}
+      isMobile={isMobile}
     >
       {letter}
     </LetterTileContainer>

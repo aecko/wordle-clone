@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { UIContext } from "../contexts/UIContext";
 import { LetterTile } from "./letterTile";
 import { KeyboardContainer, KeyboardRow } from "./style";
 
@@ -16,10 +18,11 @@ export const Keyboard: React.FC<IKeyboardProps> = ({
   handleKeyPress,
   handleSubmit,
 }) => {
+  const { isMobile } = useContext(UIContext);
   return (
-    <KeyboardContainer>
+    <KeyboardContainer isMobile={isMobile}>
       {qwertyKeyboardLetters.map((row) => (
-        <KeyboardRow>
+        <KeyboardRow isMobile={isMobile}>
           {row.map((letter) => (
             <LetterTile
               key={letter}

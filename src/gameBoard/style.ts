@@ -6,7 +6,7 @@ export const GameBoardContainer = styled.div`
   justify-content: center;
   align-items: center;
   margin: 0.5rem 0;
-  gap: 0.6rem;
+  gap: 0.3rem;
 `;
 
 export const GameBoardRow = styled.div`
@@ -14,5 +14,5 @@ export const GameBoardRow = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.3rem;
 `;

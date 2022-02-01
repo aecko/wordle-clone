@@ -4,11 +4,12 @@ import { colours } from "../../util/theme/colors";
 
 interface ILetterTileContainerProps {
   state: number;
+  isMobile?: boolean;
 }
 
 export const LetterTileContainer = styled.button<ILetterTileContainerProps>`
-  padding: 0.5rem;
-  width: 3rem;
+  padding: 0rem;
+  width: ${({ isMobile }) => (isMobile ? "1.9rem" : "3rem")};
   height: 3rem;
   border-radius: 0.5rem;
   background-color: ${({ state }) => {
@@ -27,7 +28,7 @@ export const LetterTileContainer = styled.button<ILetterTileContainerProps>`
   }};
   border: 1px solid #fff;
   color: #fff;
-  font-size: 1.5rem;
+  font-size: ${({ isMobile }) => (isMobile ? "1rem" : "1.5rem")};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,6 +36,6 @@ export const LetterTileContainer = styled.button<ILetterTileContainerProps>`
   transition: all 0.2s ease-in-out;
   &:hover {
     ${({ state }) =>
-      state === TileStates.INCORRECT ? `` : `background-color: #2874a6;`}
+      state === TileStates.UNSELECTED ? `` : `background-color: #2874a6;`}
   }
 `;

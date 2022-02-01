@@ -4,12 +4,13 @@ import { colours } from "../../util/theme/colors";
 
 interface ITileContainerProps {
   state: number;
+  isMobile?: boolean;
 }
 
 export const TileContainer = styled.div<ITileContainerProps>`
   padding: 0.5rem;
-  width: 4rem;
-  height: 4.5rem;
+  width: ${({ isMobile }) => (isMobile ? "2.5rem" : "4rem")};
+  height: ${({ isMobile }) => (isMobile ? "2.5rem" : "4rem")};
   border-radius: 1rem;
   background-color: ${({ state }) => {
     switch (state) {
@@ -27,7 +28,7 @@ export const TileContainer = styled.div<ITileContainerProps>`
   }};
   border: 1px solid #fff;
   color: #000;
-  font-size: 4rem;
+  font-size: ${({ isMobile }) => (isMobile ? "2.5rem" : "4rem")};
   display: flex;
   justify-content: center;
   align-items: center;

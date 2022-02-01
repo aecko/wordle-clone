@@ -1,14 +1,17 @@
 import styled from "styled-components";
 import { colours } from "../util/theme/colors";
 
-export const GameContainer = styled.div`
+interface IGameContainerProps {
+  isMobile?: boolean;
+}
+
+export const GameContainer = styled.div<IGameContainerProps>`
   background-color: ${colours.blue};
   display: "flex";
   justify-content: "center";
   align-items: "center";
   flex-direction: "column";
-  margin: 0 auto;
-  padding: 2rem;
+  padding: ${({ isMobile }) => (isMobile ? "0.5rem" : "2rem")};
   border-radius: 2rem;
 `;
 

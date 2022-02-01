@@ -1,39 +1,42 @@
+import UIProvider from "./contexts/UIContext";
 import { Game } from "./game";
 import { WordProvider } from "./util/contexts/WordContext";
 import { colours } from "./util/theme/colors";
 
 const App: React.FC = () => {
   return (
-    <WordProvider>
-      <div
-        style={{
-          backgroundColor: colours.black,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          minHeight: "100vh",
-          minWidth: "100vw",
-          flexDirection: "column",
-          zIndex: "-10",
-        }}
-      >
-        <img
-          src={require("./assets/img/logo.png")}
-          alt="logo"
-          style={{ height: "auto", width: "18rem" }}
-        />
-        <h1
+    <UIProvider>
+      <WordProvider>
+        <div
           style={{
-            color: colours.white,
-            fontSize: "2rem",
-            alignSelf: "center",
+            backgroundColor: colours.black,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            minHeight: "100vh",
+            minWidth: "100vw",
+            flexDirection: "column",
+            zIndex: "-10",
           }}
         >
-          Guess the word!
-        </h1>
-        <Game />
-      </div>
-    </WordProvider>
+          <img
+            src={require("./assets/img/logo.png")}
+            alt="logo"
+            style={{ height: "auto", width: "9rem" }}
+          />
+          <h2
+            style={{
+              color: colours.white,
+              fontSize: "1.5rem",
+              alignSelf: "center",
+            }}
+          >
+            Guess the word!
+          </h2>
+          <Game />
+        </div>
+      </WordProvider>
+    </UIProvider>
   );
 };
 

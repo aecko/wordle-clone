@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { UIContext } from "../contexts/UIContext";
 import { GameBoard } from "../gameBoard";
 import { Keyboard } from "../keyboard";
 import { GameStates } from "../util/consts/TileStates";
@@ -17,8 +18,9 @@ export const Game: React.FC = () => {
     word,
     currentGuessIndex,
   } = useContext(WordContext);
+  const { isMobile } = useContext(UIContext);
   return (
-    <GameContainer>
+    <GameContainer isMobile={isMobile}>
       {gameState !== GameStates.PLAYING && (
         <GameInfo
           gameState={gameState}
