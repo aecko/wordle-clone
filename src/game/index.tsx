@@ -3,15 +3,15 @@ import { GameBoard } from "../gameBoard";
 import { Keyboard } from "../keyboard";
 import { GameStates } from "../util/consts/TileStates";
 import { WordContext } from "../util/contexts/WordContext";
+import { colours } from "../util/theme/colors";
 import { GameInfo } from "./gameInfo";
-import { GameContainer } from "./style";
+import { GameContainer, GuessTheWordText } from "./style";
 
 export const Game: React.FC = () => {
   const { guesses, changeGuess, guessWord, gameState, resetGame, word } =
     useContext(WordContext);
   return (
     <GameContainer>
-      <p style={{ color: "white" }}>{word}</p>
       {gameState !== GameStates.PLAYING && (
         <GameInfo gameState={gameState} onReset={resetGame} gameWord={word} />
       )}
