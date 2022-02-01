@@ -13,9 +13,9 @@ export type Guesses = Guess[];
 export const WordContext = createContext({
   word: "",
   generateNewWord: () => {},
-  yellowLetters: [] as string[],
-  greenLetters: [] as string[],
-  greyLetters: [] as string[],
+  yellowLetters: "",
+  greenLetters: "",
+  greyLetters: "",
   guessWord: () => {},
   guesses: [] as Guesses,
   changeGuess: (letter: string) => {},
@@ -23,9 +23,9 @@ export const WordContext = createContext({
 
 export const WordProvider: React.FC = ({ children }) => {
   const [word, setWord] = useState("WORDS");
-  const [yellowLetters, setYellowLetters] = useState([] as string[]);
-  const [greenLetters, setGreenLetters] = useState([] as string[]);
-  const [greyLetters, setGreyLetters] = useState([] as string[]);
+  const [yellowLetters, setYellowLetters] = useState("");
+  const [greenLetters, setGreenLetters] = useState("");
+  const [greyLetters, setGreyLetters] = useState("");
   const [guesses, setGuesses] = useState<Guesses>(Array(5).fill([] as Guess));
   const [currentGuessIndex, setCurrentGuessIndex] = useState(0);
   console.log(guesses);
@@ -54,23 +54,31 @@ export const WordProvider: React.FC = ({ children }) => {
     const guessedWord = guesses[currentGuessIndex];
     const guessedWordTemp = guessedWord;
     const guessedWordString = guessedWord.map(({ letter }) => letter).join("");
+
+    var grey = "";
+    var green = "";
+    var yellow = "";
+
     if (guessedWord.length !== 5) return null;
 
     if (guessedWordString === word) {
-      setGreenLetters(word.split(""));
+      setGreenLetters(word);
     } else {
       guessedWord.forEach(({ letter }, index) => {
         if (!word.includes(letter)) {
-          setGreyLetters([...greyLetters, letter]);
-          guessedWordTemp[index].state = TileStates.WRONG;
+          grey += letter;
+          guessedWordTemp[index].state = TileStates.INCORRECT;
         } else if (word[index] === letter) {
-          setGreenLetters(greenLetters.concat(letter));
+          green += letter;
           guessedWordTemp[index].state = TileStates.CORRECT;
         } else {
-          setYellowLetters(yellowLetters.concat(letter));
+          yellow += letter;
           guessedWordTemp[index].state = TileStates.PARTIAL;
         }
       });
+      setGreyLetters(greyLetters + grey);
+      setGreenLetters(greenLetters + green);
+      setYellowLetters(yellowLetters + yellow);
     }
     setCurrentGuessIndex(currentGuessIndex + 1);
   };
