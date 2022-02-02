@@ -30,7 +30,7 @@ export const WordProvider: React.FC = ({ children }) => {
   const [yellowLetters, setYellowLetters] = useState("");
   const [greenLetters, setGreenLetters] = useState("");
   const [greyLetters, setGreyLetters] = useState("");
-  const [guesses, setGuesses] = useState<Guesses>(Array(5).fill([] as Guess));
+  const [guesses, setGuesses] = useState<Guesses>(Array(6).fill([] as Guess));
   const [currentGuessIndex, setCurrentGuessIndex] = useState(0);
   const [gameState, setGameState] = useState(0);
   const [hintIndex, setHintIndex] = useState(0);
@@ -74,7 +74,7 @@ export const WordProvider: React.FC = ({ children }) => {
     if (guessedWordString === word) {
       setGreenLetters(word);
       setGameState(GameStates.WON);
-    } else if (guessedWordString !== word && currentGuessIndex === 4) {
+    } else if (guessedWordString !== word && currentGuessIndex === 5) {
       setGameState(GameStates.LOST);
     } else {
       guessedWord.forEach(({ letter }, index) => {
@@ -125,7 +125,7 @@ export const WordProvider: React.FC = ({ children }) => {
   };
 
   const resetGame = () => {
-    setGuesses(Array(5).fill([] as Guess));
+    setGuesses(Array(6).fill([] as Guess));
     setCurrentGuessIndex(0);
     setYellowLetters("");
     setGreenLetters("");
