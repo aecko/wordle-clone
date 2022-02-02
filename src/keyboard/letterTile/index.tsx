@@ -13,6 +13,7 @@ export const LetterTile: React.FC<ILetterTileProps> = ({ letter, onClick }) => {
   const { greenLetters, yellowLetters, greyLetters } = useContext(WordContext);
   const { isMobile } = useContext(UIContext);
   const [colorState, setColorState] = useState(TileStates.UNSELECTED);
+  console.log("Letter", letter);
 
   useEffect(() => {
     if (greenLetters.includes(letter)) {
@@ -33,8 +34,9 @@ export const LetterTile: React.FC<ILetterTileProps> = ({ letter, onClick }) => {
       }
       state={colorState}
       isMobile={isMobile}
+      specialKey={letter === "SUB" || letter === "DEL"}
     >
-      {letter}
+      {letter === "SUB" ? "Enter" : letter === "DEL" ? "Del" : letter}
     </LetterTileContainer>
   );
 };
