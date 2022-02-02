@@ -6,13 +6,13 @@ interface IGameContainerProps {
 }
 
 export const GameContainer = styled.div<IGameContainerProps>`
-  background-color: ${colours.blue};
+  background-color: ${colours.blueDark};
   display: "flex";
   justify-content: "center";
   align-items: "center";
   flex-direction: "column";
   padding: ${({ isMobile }) => (isMobile ? "0.5rem" : "2rem")};
-  border-radius: 2rem;
+  border-radius: 0.2rem;
 `;
 
 export const GuessTheWordText = styled.h1`

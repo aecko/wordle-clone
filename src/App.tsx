@@ -9,7 +9,7 @@ const App: React.FC = () => {
       <WordProvider>
         <div
           style={{
-            backgroundColor: colours.black,
+            backgroundColor: colours.blackSecondary,
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
