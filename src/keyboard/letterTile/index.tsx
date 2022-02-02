@@ -29,9 +29,7 @@ export const LetterTile: React.FC<ILetterTileProps> = ({ letter, onClick }) => {
 
   return (
     <LetterTileContainer
-      onClick={
-        colorState === TileStates.INCORRECT ? () => {} : () => onClick(letter)
-      }
+      onClick={() => onClick(letter)}
       state={colorState}
       isMobile={isMobile}
       specialKey={letter === "SUB" || letter === "DEL"}
