@@ -61,7 +61,7 @@ export const WordProvider: React.FC = ({ children }) => {
   const guessWord = () => {
     const guessedWord = guesses[currentGuessIndex];
     var guessedWordString = "";
-    const _ = guessedWord.map(({ letter }) => {
+    guessedWord.forEach(({ letter }) => {
       guessedWordString = guessedWordString + letter.toLowerCase();
     });
     console.log(guessedWordString);
