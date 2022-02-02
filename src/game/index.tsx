@@ -30,7 +30,8 @@ export const Game: React.FC = () => {
         />
       )}
       <GameBoard guesses={guesses} />
-      <HintButton onClick={getHint}>Hint</HintButton>
+      {false && <HintButton onClick={getHint}>Hint</HintButton>}
+
       <Keyboard handleKeyPress={changeGuess} handleSubmit={() => guessWord()} />
     </GameContainer>
   );
