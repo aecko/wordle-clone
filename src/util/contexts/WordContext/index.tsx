@@ -60,9 +60,13 @@ export const WordProvider: React.FC = ({ children }) => {
 
   const guessWord = () => {
     const guessedWord = guesses[currentGuessIndex];
-    if (!WORDS.includes(guessedWord.join("").toUpperCase())) return null;
+    var guessedWordString = "";
+    const _ = guessedWord.map(({ letter }) => {
+      guessedWordString = guessedWordString + letter.toLowerCase();
+    });
+    console.log(guessedWordString);
+    if (!WORDS.includes(guessedWordString)) return null;
     const guessedWordTemp = guessedWord;
-    const guessedWordString = guessedWord.map(({ letter }) => letter).join("");
 
     var grey = greyLetters.split("").join("");
     var green = greenLetters.split("").join("");
