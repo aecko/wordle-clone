@@ -60,14 +60,13 @@ export const WordProvider: React.FC = ({ children }) => {
 
   const guessWord = () => {
     const guessedWord = guesses[currentGuessIndex];
+    if (!WORDS.includes(guessedWord.join("").toUpperCase())) return null;
     const guessedWordTemp = guessedWord;
     const guessedWordString = guessedWord.map(({ letter }) => letter).join("");
 
     var grey = greyLetters.split("").join("");
     var green = greenLetters.split("").join("");
     var yellow = yellowLetters.split("").join("");
-
-    var yellowTemp = "";
 
     if (guessedWord.length !== 5) return null;
 
@@ -78,7 +77,6 @@ export const WordProvider: React.FC = ({ children }) => {
       setGameState(GameStates.LOST);
     } else {
       guessedWord.forEach(({ letter }, index) => {
-        console.log("duplicate", checkIfDuplicate(letter, yellow), letter);
         if (!word.includes(letter)) {
           grey += letter;
           guessedWordTemp[index].state = TileStates.INCORRECT;
@@ -86,8 +84,7 @@ export const WordProvider: React.FC = ({ children }) => {
           green += letter;
           guessedWordTemp[index].state = TileStates.CORRECT;
         } else {
-          if (!checkIfDuplicate(letter, yellowTemp)) {
-            yellowTemp += letter;
+          if (!checkIfDuplicate(letter, green)) {
             yellow += letter;
             guessedWordTemp[index].state = TileStates.PARTIAL;
           }
@@ -101,24 +98,16 @@ export const WordProvider: React.FC = ({ children }) => {
     setCurrentGuessIndex(currentGuessIndex + 1);
   };
 
-  const checkIfDuplicate = (letter: string, yellow: string) => {
-    var yellowCount = 0;
-    var count = 0;
+  const checkIfDuplicate = (letter: string, green: string) => {
+    var greenCount = 0;
 
-    for (const yellowLetter of yellow) {
-      if (yellowLetter === letter) {
-        yellowCount++;
+    for (const greenLetter of green) {
+      if (greenLetter === letter) {
+        greenCount++;
       }
     }
 
-    for (const wordLetter of word) {
-      if (wordLetter === letter) {
-        count++;
-      }
-    }
-    console.log("yellowLetters", yellowLetters, yellowCount);
-    console.log("count", count);
-    if (yellowCount >= count) {
+    if (greenCount) {
       return true;
     }
     return false;
