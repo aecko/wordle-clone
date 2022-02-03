@@ -6,6 +6,7 @@ interface IGameInfoProps {
   onReset: () => void;
   gameWord: string;
   guessCount: number;
+  dailyChallenge: boolean;
 }
 
 export const GameInfo: React.FC<IGameInfoProps> = ({
@@ -13,6 +14,7 @@ export const GameInfo: React.FC<IGameInfoProps> = ({
   onReset,
   gameWord,
   guessCount,
+  dailyChallenge,
 }) => {
   return (
     <DarkOverlay>
@@ -22,7 +24,9 @@ export const GameInfo: React.FC<IGameInfoProps> = ({
             ? "You won! Congrats!"
             : "You lost. Try again."}
         </h1>
-        <h3>The word was: {gameWord.toUpperCase()}</h3>
+        <h3>{`The ${
+          dailyChallenge ? "Daily Challenge" : "word"
+        } was: ${gameWord.toUpperCase()}`}</h3>
         {gameState === GameStates.WON && (
           <h3>You guessed it in {guessCount} guesses!</h3>
         )}

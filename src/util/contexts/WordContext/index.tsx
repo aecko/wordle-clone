@@ -23,6 +23,8 @@ export const WordContext = createContext({
   resetGame: () => {},
   currentGuessIndex: 0,
   getHint: () => {},
+  setupDailyChallenge: () => {},
+  playingDailyChallenge: false,
 });
 
 export const WordProvider: React.FC = ({ children }) => {
@@ -34,6 +36,7 @@ export const WordProvider: React.FC = ({ children }) => {
   const [currentGuessIndex, setCurrentGuessIndex] = useState(0);
   const [gameState, setGameState] = useState(0);
   const [hintIndex, setHintIndex] = useState(0);
+  const [playingDailyChallenge, setPlayingDailyChallenge] = useState(false);
 
   useEffect(() => {
     generateNewWord();
@@ -58,6 +61,18 @@ export const WordProvider: React.FC = ({ children }) => {
     setWord(randomWord.toUpperCase());
   };
 
+  const setupDailyChallenge = async () => {
+    const resp = await fetch(
+      "https://us-central1-wordle-clone-aecko.cloudfunctions.net/app/wordOfTheDay"
+    );
+    const data = await resp.text();
+    if (data) {
+      resetGame(data);
+    } else {
+      resetGame();
+    }
+  };
+
   const guessWord = () => {
     const guessedWord = guesses[currentGuessIndex];
     var guessedWordString = "";
@@ -74,7 +89,7 @@ export const WordProvider: React.FC = ({ children }) => {
 
     if (guessedWord.length !== 5) return null;
 
-    if (guessedWordString === word) {
+    if (guessedWordString.toUpperCase() === word.toUpperCase()) {
       setGreenLetters(word);
       setGameState(GameStates.WON);
     } else if (guessedWordString !== word && currentGuessIndex === 5) {
@@ -117,14 +132,20 @@ export const WordProvider: React.FC = ({ children }) => {
     return false;
   };
 
-  const resetGame = () => {
+  const resetGame = (newWord?: string) => {
     setGuesses(Array(6).fill([] as Guess));
     setCurrentGuessIndex(0);
     setYellowLetters("");
     setGreenLetters("");
     setGreyLetters("");
     setGameState(GameStates.PLAYING);
-    generateNewWord();
+    if (newWord?.length === 5) {
+      setWord(newWord.toUpperCase());
+      setPlayingDailyChallenge(true);
+    } else {
+      generateNewWord();
+      setPlayingDailyChallenge(false);
+    }
   };
 
   const getHint = () => {
@@ -154,6 +175,8 @@ export const WordProvider: React.FC = ({ children }) => {
         resetGame,
         currentGuessIndex,
         getHint,
+        setupDailyChallenge,
+        playingDailyChallenge,
       }}
     >
       {children}
