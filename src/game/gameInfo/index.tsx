@@ -28,7 +28,10 @@ export const GameInfo: React.FC<IGameInfoProps> = ({
           dailyChallenge ? "Daily Challenge" : "word"
         } was: ${gameWord.toUpperCase()}`}</h3>
         {gameState === GameStates.WON && (
-          <h3>You guessed it in {guessCount} guesses!</h3>
+          <h3>
+            You guessed it in {guessCount}{" "}
+            {guessCount > 1 ? "guesses" : "guess"}!
+          </h3>
         )}
         <RetryButton onClick={onReset}>Play again!</RetryButton>
       </GameInfoContainer>
