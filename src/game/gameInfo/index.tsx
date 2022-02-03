@@ -30,7 +30,7 @@ export const GameInfo: React.FC<IGameInfoProps> = ({
         {gameState === GameStates.WON && (
           <h3>You guessed it in {guessCount} guesses!</h3>
         )}
-        <RetryButton onClick={onReset}>Retry</RetryButton>
+        <RetryButton onClick={onReset}>Play again!</RetryButton>
       </GameInfoContainer>
     </DarkOverlay>
   );

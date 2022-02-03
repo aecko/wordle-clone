@@ -103,7 +103,7 @@ export const WordProvider: React.FC = ({ children }) => {
           green += letter;
           guessedWordTemp[index].state = TileStates.CORRECT;
         } else {
-          if (!checkIfDuplicate(letter, green)) {
+          if (!checkIfDuplicate(letter, green, yellow)) {
             yellow += letter;
             guessedWordTemp[index].state = TileStates.PARTIAL;
           }
@@ -117,8 +117,9 @@ export const WordProvider: React.FC = ({ children }) => {
     setCurrentGuessIndex(currentGuessIndex + 1);
   };
 
-  const checkIfDuplicate = (letter: string, green: string) => {
+  const checkIfDuplicate = (letter: string, green: string, yellow: string) => {
     var greenCount = 0;
+    var yellowCount = 0;
 
     for (const greenLetter of green) {
       if (greenLetter === letter) {
@@ -126,7 +127,13 @@ export const WordProvider: React.FC = ({ children }) => {
       }
     }
 
-    if (greenCount) {
+    for (const yellowLetter of yellow) {
+      if (yellowLetter === letter) {
+        yellowCount++;
+      }
+    }
+
+    if (greenCount > 0 || yellowCount > 0) {
       return true;
     }
     return false;
