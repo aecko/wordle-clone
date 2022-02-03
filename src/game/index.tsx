@@ -6,6 +6,7 @@ import { GameStates } from "../util/consts/TileStates";
 import { WordContext } from "../util/contexts/WordContext";
 import { GameInfo } from "./gameInfo";
 import { GameContainer, HintButton } from "./style";
+import { colours } from "../util/theme/colors";
 
 export const Game: React.FC = () => {
   const {
@@ -16,7 +17,8 @@ export const Game: React.FC = () => {
     resetGame,
     word,
     currentGuessIndex,
-    getHint,
+    setupDailyChallenge,
+    playingDailyChallenge,
   } = useContext(WordContext);
   const { isMobile } = useContext(UIContext);
   return (
@@ -27,10 +29,26 @@ export const Game: React.FC = () => {
           onReset={resetGame}
           gameWord={word}
           guessCount={currentGuessIndex}
+          dailyChallenge={playingDailyChallenge}
         />
       )}
       <GameBoard guesses={guesses} />
-      {false && <HintButton onClick={getHint}>Hint</HintButton>}
+      {!playingDailyChallenge && (
+        <HintButton onClick={() => setupDailyChallenge()}>
+          Play Daily Challenge Word
+        </HintButton>
+      )}
+      {playingDailyChallenge && (
+        <h2
+          style={{
+            color: colours.white,
+            fontSize: "1rem",
+            alignSelf: "center",
+          }}
+        >
+          Playing the Daily Challenge!
+        </h2>
+      )}
 
       <Keyboard handleKeyPress={changeGuess} handleSubmit={() => guessWord()} />
     </GameContainer>

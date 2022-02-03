@@ -1530,7 +1530,6 @@ export const WORDS = [
   "rabid",
   "racer",
   "radar",
-  "radii",
   "radio",
   "rainy",
   "raise",
